@@ -9,7 +9,7 @@
       <case-sensitivity plain-identifiers="exact" quoted-identifiers="exact" />
       <secret-storage>master_key</secret-storage>
       <user-name>homestead</user-name>
-      <introspection-schemas>*:corporate</introspection-schemas>
+      <introspection-schemas>*:corporate,homestead</introspection-schemas>
       <ssh-properties>
         <enabled>true</enabled>
         <proxy-host>192.168.10.10</proxy-host>
