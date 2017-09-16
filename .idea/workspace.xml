@@ -43,8 +43,8 @@
       <file leaf-file-name="site.blade.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resources/views/pink/layouts/site.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="288">
-              <caret line="49" column="82" lean-forward="false" selection-start-line="49" selection-start-column="82" selection-end-line="49" selection-end-column="82" />
+            <state relative-caret-position="306">
+              <caret line="56" column="75" lean-forward="false" selection-start-line="56" selection-start-column="75" selection-end-line="56" selection-end-column="75" />
               <folding />
             </state>
           </provider>
@@ -214,7 +214,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="28773000" />
+    <option name="totallyTimeSpent" value="29153000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -658,8 +658,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/pink/layouts/site.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="49" column="82" lean-forward="false" selection-start-line="49" selection-start-column="82" selection-end-line="49" selection-end-column="82" />
+        <state relative-caret-position="306">
+          <caret line="56" column="75" lean-forward="false" selection-start-line="56" selection-start-column="75" selection-end-line="56" selection-end-column="75" />
           <folding />
         </state>
       </provider>

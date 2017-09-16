@@ -58,24 +58,24 @@
 
     <!-- FONTs -->
     <link rel="stylesheet" id="google-fonts-css" href="http://fonts.googleapis.com/css?family=Oswald%7CDroid+Sans%7CPlayfair+Display%7COpen+Sans+Condensed%3A300%7CRokkitt%7CShadows+Into+Light%7CAbel%7CDamion%7CMontez&amp;ver=3.4.2" type="text/css" media="all" />
-    <link rel='stylesheet' href='css/font-awesome.css' type='text/css' media='all' />
+    <link rel='stylesheet' href='{{ asset(env('THEME')) }}/css/font-awesome.css' type='text/css' media='all' />
 
     <!-- JAVASCRIPTs -->
-    <script type="text/javascript" src="js/jquery.js"></script>
-    <script type="text/javascript" src="js/comment-reply.js"></script>
-    <script type="text/javascript" src="js/jquery.quicksand.js"></script>
-    <script type="text/javascript" src="js/jquery.tipsy.js"></script>
-    <script type="text/javascript" src="js/jquery.prettyPhoto.js"></script>
-    <script type="text/javascript" src="js/jquery.cycle.min.js"></script>
-    <script type="text/javascript" src="js/jquery.anythingslider.js"></script>
-    <script type="text/javascript" src="js/jquery.eislideshow.js"></script>
-    <script type="text/javascript" src="js/jquery.easing.js"></script>
-    <script type="text/javascript" src="js/jquery.flexslider-min.js"></script>
-    <script type="text/javascript" src="js/jquery.aw-showcase.js"></script>
-    <script type="text/javascript" src="js/layerslider.kreaturamedia.jquery-min.js"></script>
-    <script type="text/javascript" src="js/shortcodes.js"></script>
-    <script type="text/javascript" src="js/jquery.colorbox-min.js"></script> <!-- nav -->
-    <script type="text/javascript" src="js/jquery.tweetable.js"></script>
+    <script type="text/javascript" src="{{ asset(env('THEME')) }}/js/jquery.js"></script>
+    <script type="text/javascript" src="{{ asset(env('THEME')) }}/js/comment-reply.js"></script>
+    <script type="text/javascript" src="{{ asset(env('THEME')) }}/js/jquery.quicksand.js"></script>
+    <script type="text/javascript" src="{{ asset(env('THEME')) }}/js/jquery.tipsy.js"></script>
+    <script type="text/javascript" src="{{ asset(env('THEME')) }}/js/jquery.prettyPhoto.js"></script>
+    <script type="text/javascript" src="{{ asset(env('THEME')) }}/js/jquery.cycle.min.js"></script>
+    <script type="text/javascript" src="{{ asset(env('THEME')) }}/js/jquery.anythingslider.js"></script>
+    <script type="text/javascript" src="{{ asset(env('THEME')) }}/js/jquery.eislideshow.js"></script>
+    <script type="text/javascript" src="{{ asset(env('THEME')) }}/js/jquery.easing.js"></script>
+    <script type="text/javascript" src="{{ asset(env('THEME')) }}/js/jquery.flexslider-min.js"></script>
+    <script type="text/javascript" src="{{ asset(env('THEME')) }}/js/jquery.aw-showcase.js"></script>
+    <script type="text/javascript" src="{{ asset(env('THEME')) }}/js/layerslider.kreaturamedia.jquery-min.js"></script>
+    <script type="text/javascript" src="{{ asset(env('THEME')) }}/js/shortcodes.js"></script>
+    <script type="text/javascript" src="{{ asset(env('THEME')) }}/js/jquery.colorbox-min.js"></script> <!-- nav -->
+    <script type="text/javascript" src="{{ asset(env('THEME')) }}/js/jquery.tweetable.js"></script>
 
 </head>
 <!-- END HEAD -->
