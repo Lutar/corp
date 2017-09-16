@@ -6,6 +6,7 @@ use Corp\Repositories\MenusRepository;
 use Illuminate\Http\Request;
 
 use Corp\Http\Requests;
+use Lavary\Menu\Menu;
 
 class SiteController extends Controller
 {
@@ -34,14 +35,33 @@ class SiteController extends Controller
     {
         $menu = $this->m_rep->get();
 
-        return $menu;
+        $mBuilder = new Menu();
+        $mBuild = $mBuilder->make('MyNav', function ($m) use ($menu) {
+
+            foreach ($menu as $item) {
+                if (0 == $item->parent_id) {
+                    $m->add($item->title, $item->path)->id($item->id);
+                } else {
+                    if ($m->find($item->parent_id)) {
+                        $m->find($item->parent_id)->add($item->title, $item->path)->id($item->id);
+                    }
+                }
+            }
+
+        });
+        //dd($mBuild);
+
+        return $mBuild;
     }
 
     protected function renderOutput()
     {
         $menu = $this->getMenu();
 
-        $navigation = view(env('THEME').'.navigation')->render();
+        $navigation = view(env('THEME').'.navigation')
+            ->with('menu', $menu)
+            ->render();
+
         $this->vars = array_add($this->vars, 'navigation', $navigation);
 
         return view($this->template)->with($this->vars);
