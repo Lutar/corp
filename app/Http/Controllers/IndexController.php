@@ -2,6 +2,7 @@
 
 namespace Corp\Http\Controllers;
 
+use Corp\Repositories\MenusRepository;
 use Illuminate\Http\Request;
 
 use Corp\Http\Requests;
@@ -11,7 +12,7 @@ class IndexController extends SiteController
 
     public function __construct()
     {
-        parent::__construct();
+        parent::__construct(new MenusRepository(new \Corp\Menu()));
 
         $this->template = env('THEME').'.index';
         $this->bar = 'right';
