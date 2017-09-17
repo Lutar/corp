@@ -56,6 +56,11 @@ class IndexController extends SiteController
             ->render();
 
 
+        $this->keywords = 'Home Page';
+        $this->meta_desc = 'Home Page';
+        $this->title = 'Home Page';
+
+
         return $this->renderOutput();
     }
 
