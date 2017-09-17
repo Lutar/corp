@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use Corp\Http\Requests;
 
-class PortfolioController extends Controller
+class PortfolioController extends SiteController
 {
     //
 }

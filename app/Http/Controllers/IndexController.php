@@ -6,6 +6,7 @@ use Corp\Repositories\ArticlesRepository;
 use Corp\Repositories\MenusRepository;
 use Corp\Repositories\PortfoliosRepository;
 use Corp\Repositories\SlidersRepository;
+use Corp\Menu;
 use Illuminate\Http\Request;
 use Config;
 use Corp\Http\Requests;
@@ -19,7 +20,7 @@ class IndexController extends SiteController
         ArticlesRepository $a_rep
     )
     {
-        parent::__construct(new MenusRepository(new \Corp\Menu()));
+        parent::__construct(new MenusRepository(new Menu()));
 
         $this->s_rep = $s_rep;
         $this->p_rep = $p_rep;
