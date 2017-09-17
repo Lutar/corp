@@ -4,7 +4,6 @@ namespace Corp\Http\Controllers;
 
 use Corp\Repositories\MenusRepository;
 use Illuminate\Http\Request;
-
 use Corp\Http\Requests;
 use Lavary\Menu\Menu;
 
