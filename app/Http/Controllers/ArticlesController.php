@@ -63,9 +63,9 @@ class ArticlesController extends SiteController
             true
         );
 
-        /*if ($articles) {
-            $articles->load('category', 'user', 'comment');
-        }*/
+        if ($articles) {
+            $articles->load('category', 'user', 'comments');
+        }
 
         return $articles;
     }
@@ -76,6 +76,10 @@ class ArticlesController extends SiteController
             ['text', 'name', 'email', 'site', 'article_id', 'user_id'],
             $take
         );
+
+        if($comments) {
+            $comments->load('article','user');
+        }
 
         return $comments;
     }
