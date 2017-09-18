@@ -3,6 +3,7 @@
 namespace Corp\Http\Controllers;
 
 use Corp\Repositories\ArticlesRepository;
+use Corp\Repositories\CommentsRepository;
 use Corp\Repositories\MenusRepository;
 use Corp\Repositories\PortfoliosRepository;
 use Corp\Menu;
@@ -15,12 +16,14 @@ class ArticlesController extends SiteController
 
     public function __construct(
         PortfoliosRepository $p_rep,
+        CommentsRepository $c_rep,
         ArticlesRepository $a_rep
     )
     {
         parent::__construct(new MenusRepository(new Menu()));
 
         $this->p_rep = $p_rep;
+        $this->c_rep = $c_rep;
         $this->a_rep = $a_rep;
         $this->template = env('THEME') . '.articles';
         $this->bar = 'right';
@@ -36,9 +39,17 @@ class ArticlesController extends SiteController
         $this->vars = array_add($this->vars, 'content', $content);
 
 
-        $this->keywords = 'Home Page';
-        $this->meta_desc = 'Home Page';
-        $this->title = 'Home Page';
+        $portfolios = $this->getPortfolios(config('settings.recent_portfolios'));
+        $comments = $this->getComments(config('settings.recent_comments'));
+        $this->contentRightBar = view(env("THEME").'.articlesBar')
+            ->with('portfolios', $portfolios)
+            ->with('comments', $comments)
+            ->render();
+
+
+        $this->keywords = 'Blog Page';
+        $this->meta_desc = 'Blog Page';
+        $this->title = 'Blog Page';
 
 
         return $this->renderOutput();
@@ -59,9 +70,22 @@ class ArticlesController extends SiteController
         return $articles;
     }
 
-    protected function getPortfolios()
+    protected function getComments($take)
     {
-        $portfolios = $this->p_rep->get('*', Config::get('settings.home_port_count'));
+        $comments = $this->c_rep->get(
+            ['text', 'name', 'email', 'site', 'article_id', 'user_id'],
+            $take
+        );
+
+        return $comments;
+    }
+
+    protected function getPortfolios($take)
+    {
+        $portfolios = $this->p_rep->get(
+            ['title', 'text', 'alias', 'customer', 'img', 'filter_alias'],
+            $take
+        );
 
         return $portfolios;
     }
