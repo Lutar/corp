@@ -2,6 +2,7 @@
 
 namespace Corp\Http\Controllers;
 
+use Corp\Category;
 use Corp\Repositories\ArticlesRepository;
 use Corp\Repositories\CommentsRepository;
 use Corp\Repositories\MenusRepository;
@@ -30,9 +31,9 @@ class ArticlesController extends SiteController
     }
 
 
-    public function index()
+    public function index($cat_alias = false)
     {
-        $articles = $this->getArticles();
+        $articles = $this->getArticles($cat_alias);
         $content = view(env('THEME') . '.articles_content')
             ->with('articles', $articles)
             ->render();
@@ -55,12 +56,46 @@ class ArticlesController extends SiteController
         return $this->renderOutput();
     }
 
-    protected function getArticles()
+    public function show($alias = false)
     {
+        $article = $this->a_rep->one($alias, ['comments' => true]);
+        dd($article);
+        $content = view(env('THEME').'.article_content')
+            ->with('article', $article)
+            ->render();
+        $this->vars = array_add($this->vars, 'content', $content);
+
+
+        $portfolios = $this->getPortfolios(config('settings.recent_portfolios'));
+        $comments = $this->getComments(config('settings.recent_comments'));
+        $this->contentRightBar = view(env("THEME").'.articlesBar')
+            ->with('portfolios', $portfolios)
+            ->with('comments', $comments)
+            ->render();
+
+
+        $this->keywords = 'Article Page';
+        $this->meta_desc = 'Article Page';
+        $this->title = 'Article Page';
+
+
+        return $this->renderOutput();
+    }
+
+    protected function getArticles($alias = false)
+    {
+        $where = false;
+
+        if ($alias) {
+            $id = Category::select('id')->where('alias', $alias)->first()->id;
+            $where = ['category_id', $id];
+        }
+
         $articles = $this->a_rep->get(
             ['id', 'title', 'created_at', 'img', 'alias', 'desc', 'user_id', 'category_id'],
             false,
-            true
+            true,
+            $where
         );
 
         if ($articles) {
