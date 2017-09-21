@@ -27,6 +27,7 @@
 
     <meta name="keywords" content="{{ isset($keywords) ? $keywords : '' }}"/>
     <meta name="description" content="{{ isset($meta_desc) ? $meta_desc : '' }}"/>
+    <meta name="csrf-token" content="{{ csrf_token() }}"/>
 
     <title>{{ isset($title) ? $title : 'Pink' }}</title>
 

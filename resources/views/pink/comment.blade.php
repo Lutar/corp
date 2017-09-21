@@ -13,7 +13,7 @@
                         <a href="#comment-2">
                             {{ is_object($item->created_at) ? $item->created_at->format('F d, Y \a\t H:i \p\m') : '' }}</a>
                     </div>
-                    <div class="commentNumber">#&nbsp;</div>
+                    <div class="commentNumber">#</div>
                 </div>
                 <div class="comment-body">
                     <p>{!! $item->text !!}</p>
