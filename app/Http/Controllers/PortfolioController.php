@@ -40,17 +40,33 @@ class PortfolioController extends SiteController
 
     }
 
-    public function show()
+    public function show($alias = false)
     {
+
+        $portfolio = $this->p_rep->one($alias);
+        $portfolios = $this->getPortfolios(config('settings.other_portfolios'), false);
+        $content = view(env('THEME').'.portfolio_content')
+            ->with(['portfolio' => $portfolio, 'portfolios' => $portfolios])
+            ->render();
+        $this->vars = array_add($this->vars, 'content', $content);
+
+
+        $this->keywords = $portfolio->keywords;
+        $this->meta_desc = $portfolio->meta_desc;
+        $this->title = $portfolio->title;
+
+
+        return $this->renderOutput();
+
     }
 
-    protected function getPortfolios()
+    protected function getPortfolios($take = false, $paginate = true)
     {
 
         $portfolios = $this->p_rep->get(
-            ['title', 'text', 'alias', 'customer', 'img', 'filter_alias', 'created_at'],
-            false,
-            true
+            '*',
+            $take,
+            $paginate
         );
 
         if ($portfolios) {
