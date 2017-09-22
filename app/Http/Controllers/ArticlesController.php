@@ -21,6 +21,7 @@ class ArticlesController extends SiteController
         ArticlesRepository $a_rep
     )
     {
+
         parent::__construct(new MenusRepository(new Menu()));
 
         $this->p_rep = $p_rep;
@@ -28,11 +29,13 @@ class ArticlesController extends SiteController
         $this->a_rep = $a_rep;
         $this->template = env('THEME') . '.articles';
         $this->bar = 'right';
+
     }
 
 
     public function index($cat_alias = false)
     {
+
         $articles = $this->getArticles($cat_alias);
         $content = view(env('THEME') . '.articles_content')
             ->with('articles', $articles)
@@ -54,10 +57,12 @@ class ArticlesController extends SiteController
 
 
         return $this->renderOutput();
+
     }
 
     public function show($alias = false)
     {
+
         $article = $this->a_rep->one($alias, ['comments' => true]);
         if ($article) {
             $article->img = json_decode($article->img);
@@ -83,15 +88,19 @@ class ArticlesController extends SiteController
 
 
         return $this->renderOutput();
+
     }
 
-    protected function getArticles($alias = false)
+    private function getArticles($alias = false)
     {
+
         $where = false;
 
         if ($alias) {
+
             $id = Category::select('id')->where('alias', $alias)->first()->id;
             $where = ['category_id', $id];
+
         }
 
         $articles = $this->a_rep->get(
@@ -102,33 +111,42 @@ class ArticlesController extends SiteController
         );
 
         if ($articles) {
+
             $articles->load('category', 'user', 'comments');
+
         }
 
         return $articles;
+
     }
 
-    protected function getComments($take)
+    private function getComments($take)
     {
+
         $comments = $this->c_rep->get(
             ['text', 'name', 'email', 'site', 'article_id', 'user_id'],
             $take
         );
 
         if($comments) {
+
             $comments->load('article','user');
+
         }
 
         return $comments;
+
     }
 
-    protected function getPortfolios($take)
+    private function getPortfolios($take)
     {
+
         $portfolios = $this->p_rep->get(
             ['title', 'text', 'alias', 'customer', 'img', 'filter_alias'],
             $take
         );
 
         return $portfolios;
+
     }
 }

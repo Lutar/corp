@@ -37,6 +37,7 @@ class IndexController extends SiteController
      */
     public function index()
     {
+
         $portfolios = $this->getPortfolios();
         $content = view(env('THEME').'.content')
             ->with('portfolios', $portfolios)
@@ -63,27 +64,33 @@ class IndexController extends SiteController
 
 
         return $this->renderOutput();
+
     }
 
-    protected function getArticles()
+    private function getArticles()
     {
+
         $articles = $this->a_rep->get(
             ['title', 'created_at', 'img', 'alias'],
             Config::get('settings.home_articles-count')
         );
 
         return $articles;
+
     }
 
-    protected function getPortfolios()
+    private function getPortfolios()
     {
+
         $portfolios = $this->p_rep->get('*', Config::get('settings.home_port_count'));
 
         return $portfolios;
+
     }
 
-    protected function getSliders()
+    private function getSliders()
     {
+
         $sliders = $this->s_rep->get();
 
         if ($sliders->isEmpty()) {
@@ -96,6 +103,7 @@ class IndexController extends SiteController
         });
 
         return $sliders;
+
     }
 
     /**

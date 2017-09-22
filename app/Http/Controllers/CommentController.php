@@ -39,6 +39,7 @@ class CommentController extends SiteController
      */
     public function store(Request $request)
     {
+
         $data = $request->except('_token', 'comment_post_ID', 'comment_parent');
 
         $data['article_id'] = $request->input('comment_post_ID');
@@ -59,7 +60,9 @@ class CommentController extends SiteController
 
 
         if ($validator->fails()) {
+
             return \Response::json(['error' => $validator->errors()->all()]);
+
         }
 
 
@@ -67,11 +70,15 @@ class CommentController extends SiteController
 
         $user = Auth::user();
         if ($user) {
+
             $comment->user_id = $user->id;
+
         }
+
 
         $post = Article::find($data['article_id']);
         $post->comments()->save($comment);
+
 
         $comment->load('user');
         $data['id'] = $comment->id;
@@ -82,7 +89,9 @@ class CommentController extends SiteController
             ->with('data', $data)
             ->render();
 
+
         return \Response::json(['success' => true, 'comment' => $view_comment, 'data' => $data]);
+
     }
 
     /**
