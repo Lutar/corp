@@ -1,3 +1,12 @@
+<!-- START PAGE META -->
+<div id="page-meta">
+    <div class="inner group">
+        <h3>{!! Lang::get('ru.welc_proj') !!}</h3>
+        <h4>{!! Lang::get('ru.enjoy_proj') !!}</h4>
+    </div>
+</div>
+<!-- END PAGE META -->
+
 <div id="content-page" class="content group">
     <div class="hentry group">
         @if($portfolios)
