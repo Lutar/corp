@@ -35,7 +35,7 @@ class SiteController extends Controller
     }
 
 
-    protected function getMenu()
+    public function getMenu()
     {
         $menu = $this->m_rep->get();
 
