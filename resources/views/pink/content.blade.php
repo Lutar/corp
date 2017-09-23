@@ -20,7 +20,7 @@
                                 <h2><a href="{{ route('portfolios.show', ['alias'=>$item->alias]) }}">{!! $item->title !!}</a></h2>
                                 <p class="work-categories">in: <a href="#">{!! $item->filter->title !!}</a></p>
                                 <p>{!! str_limit($item->text, 200) !!}</p>
-                                    <a href="{{ route('portfolios.show', ['alias'=>$item->alias]) }}" class="read-more">|| Read more</a>
+                                    <a href="{{ route('portfolios.show', ['alias'=>$item->alias]) }}" class="read-more">|| {!! trans('ru.read_more') !!}</a>
                             </div>
                         </div>
 

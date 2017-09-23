@@ -87,7 +87,7 @@
 <!-- END HEAD -->
 
 <!-- START BODY -->
-<body class="no_js responsive {{ (Route::currentRouteName() == 'home') || (Route::currentRouteName() == 'portfolios.index') ? 'page-template-home-php' : '' }} stretched">
+<body class="no_js responsive {{ (Route::currentRouteName() == 'home') || (Route::currentRouteName() == 'portfolios.index') || (Route::currentRouteName() == 'portfolios.show') ? 'page-template-home-php' : '' }} stretched">
 
 <!-- START BG SHADOW -->
 <div class="bg-shadow">
@@ -108,8 +108,8 @@
 
                 <div id="sidebar-header" class="group">
                     <div class="widget-first widget yit_text_quote">
-                        <blockquote class="text-quote-quote">&#8220;The caterpillar does all the work but the butterfly gets all the publicity.&#8221;</blockquote>
-                        <cite class="text-quote-author">George Carlin</cite>
+                        <blockquote class="text-quote-quote">&#8220;{!! Lang::get('ru.quote_in_title') !!}&#8221;</blockquote>
+                        <cite class="text-quote-author">{!! Lang::get('ru.quote_author') !!}</cite>
                     </div>
                 </div>
                 <div class="clearer"></div>

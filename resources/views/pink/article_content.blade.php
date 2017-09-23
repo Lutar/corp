@@ -24,7 +24,7 @@
             <div class="the-content single group">
                 {!! $article->text !!}
                 <div class="socials">
-                    <h2>love it, share it!</h2>
+                    <h2>{!! trans('ru.like_it') !!}</h2>
                     <a href="https://www.facebook.com/sharer.html?u=http%3A%2F%2Fyourinspirationtheme.com%2Fdemo%2Fpinkrio%2F2012%2F09%2F24%2Fthis-is-the-title-of-the-first-article-enjoy-it%2F&amp;t=This+is+the+title+of+the+first+article.+Enjoy+it." class="socials-small facebook-small" title="Facebook">facebook</a>
                     <a href="https://twitter.com/share?url=http%3A%2F%2Fyourinspirationtheme.com%2Fdemo%2Fpinkrio%2F2012%2F09%2F24%2Fthis-is-the-title-of-the-first-article-enjoy-it%2F&amp;text=This+is+the+title+of+the+first+article.+Enjoy+it." class="socials-small twitter-small" title="Twitter">twitter</a>
                     <a href="https://plusone.google.com/_/+1/confirm?hl=en&amp;url=http%3A%2F%2Fyourinspirationtheme.com%2Fdemo%2Fpinkrio%2F2012%2F09%2F24%2Fthis-is-the-title-of-the-first-article-enjoy-it%2F&amp;title=This+is+the+title+of+the+first+article.+Enjoy+it." class="socials-small google-small" title="Google">google</a>
@@ -32,7 +32,7 @@
                     <a href="http://yourinspirationtheme.com/demo/pinkrio/2012/09/24/this-is-the-title-of-the-first-article-enjoy-it/" class="socials-small bookmark-small" title="This is the title of the first article. Enjoy it.">bookmark</a>
                 </div>
             </div>
-            <p class="tags">Tags: <a href="#" rel="tag">book</a>, <a href="#" rel="tag">css</a>, <a href="#" rel="tag">design</a>, <a href="#" rel="tag">inspiration</a></p>
+            <p class="tags">{{ trans('ru.tags') }}: <a href="#" rel="tag">book</a>, <a href="#" rel="tag">css</a>, <a href="#" rel="tag">design</a>, <a href="#" rel="tag">inspiration</a></p>
             <div class="clear"></div>
         </div>
         <!-- START COMMENTS -->
@@ -66,17 +66,17 @@
                 <form action="{{ route('comment.store', []) }}" method="post" id="commentform">
                     {{ csrf_field() }}
                     @if(!Auth::check())
-                        <p class="comment-form-author"><label for="author">Name</label> <input id="name" name="name" type="text" value="" size="30" aria-required="true" /></p>
-                        <p class="comment-form-email"><label for="email">Email</label> <input id="email" name="email" type="text" value="" size="30" aria-required="true" /></p>
-                        <p class="comment-form-url"><label for="url">Website</label><input id="url" name="site" type="text" value="" size="30" /></p>
+                        <p class="comment-form-author"><label for="author">{!! trans('ru.name') !!}</label> <input id="name" name="name" type="text" value="" size="30" aria-required="true" /></p>
+                        <p class="comment-form-email"><label for="email">{!! trans('ru.email') !!}</label> <input id="email" name="email" type="text" value="" size="30" aria-required="true" /></p>
+                        <p class="comment-form-url"><label for="url">{!! trans('ru.site') !!}</label><input id="url" name="site" type="text" value="" size="30" /></p>
                     @endif
 
-                    <p class="comment-form-comment"><label for="comment">Your comment</label><textarea id="comment" name="text" cols="45" rows="8"></textarea></p>
+                    <p class="comment-form-comment"><label for="comment">{!! trans('ru.comment') !!}</label><textarea id="comment" name="text" cols="45" rows="8"></textarea></p>
                     <div class="clear"></div>
                     <p class="form-submit">
                         <input id="comment_parent" type="hidden" name="comment_parent" value="0"/>
                         <input id="comment_post_ID" type="hidden" name="comment_post_ID" value="{{ $article->id }}"/>
-                        <input name="submit" type="submit" id="submit" value="Post Comment" />
+                        <input name="submit" type="submit" id="submit" value="{!! trans('ru.send') !!}" />
                     </p>
                 </form>
             </div>
