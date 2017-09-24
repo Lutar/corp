@@ -16,6 +16,11 @@ class User extends Authenticatable
         return $this->hasMany('Corp\Comment');
     }
 
+    public function roles()
+    {
+        return $this->belongsToMany('Corp\Role', 'user_role');
+    }
+
     /**
      * The attributes that are mass assignable.
      *
