@@ -33,10 +33,9 @@ class ArticlesController extends AdminController
         $this->title = 'Менеджер статей';
 
         $articles = $this->getArticles();
-        $content = view(env('THEME').'.admin.articles_content')
+        $this->content = view(env('THEME').'.admin.articles_content')
             ->with('articles', $articles)
             ->render();
-        $this->vars = array_add($this->vars, 'content', $content);
 
         return $this->renderOutput();
     }
@@ -53,7 +52,7 @@ class ArticlesController extends AdminController
      */
     public function create()
     {
-        if (Gate::denies('save', new Article())) {
+        if (Gate::denies('save', new Article)) {
             abort(403);
         }
 
@@ -116,9 +115,39 @@ class ArticlesController extends AdminController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Article $article)
     {
-        //
+        //Article::where('alias', $alias);
+        if (Gate::denies('edit', new Article)) {
+            abort(403);
+        }
+
+        $article->img = json_decode($article->img);
+
+        $this->title = 'Редактирование материала - '.$article->title;
+
+        $categories = \Corp\Category::select(['title', 'alias', 'parent_id', 'id'])->get();
+        $lists = array();
+
+        foreach ($categories as $category) {
+            if (0 == $category->parent_id) {
+                $lists[$category->title] = array();
+            } else {
+                $lists[
+                $categories
+                    ->where('id', $category->parent_id)
+                    ->first()
+                    ->title
+                ][$category->id] = $category->title;
+            }
+        }
+
+        $this->content = view(env('THEME').'.admin.articles_create_content')
+            ->with('categories', $lists)
+            ->with('article', $article)
+            ->render();
+
+        return $this->renderOutput();
     }
 
     /**
