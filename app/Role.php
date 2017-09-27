@@ -19,6 +19,7 @@ class Role extends Model
     public function hasPermission($name, $require = false)
     {
         if (is_array($name)) {
+
             foreach ($name as $permissionName) {
                 $hasPermission = $this->hasPermission($permissionName);
                 if ($hasPermission && !$require) {
@@ -26,15 +27,29 @@ class Role extends Model
                 } elseif (!$hasPermission && $require) {
                     return false;
                 }
-                return $require;
             }
+
+            return $require;
+
         } else {
+
             foreach ($this->permissions as $permission) {
                 if (str_is($name, $permission->name)) {
                     return true;
                 }
             }
+
             return false;
         }
+    }
+
+    public function savePermissions($inputPermissions)
+    {
+        if ($inputPermissions) {
+            $this->permissions()->sync($inputPermissions);
+        } else {
+            $this->permissions()->detach();
+        }
+        return true;
     }
 }

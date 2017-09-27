@@ -79,7 +79,8 @@ class PermissionsController extends AdminController
      */
     public function store(Request $request)
     {
-        //
+        $result = $this->per_rep->changePermissions($request);
+            return back()->with($result);
     }
 
     /**
