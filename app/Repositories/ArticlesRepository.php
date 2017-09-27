@@ -91,10 +91,7 @@ class ArticlesRepository extends Repository
         $this->model->fill($data);
         if ($request->user()->articles()->save($this->model)) {
             return ['status' => 'Материал добавлен'];
-        } else {
-            return ['error' => 'Материал не добавлен'];
         }
-
     }
 
     public function updateArticles($request, $article)
@@ -158,9 +155,18 @@ class ArticlesRepository extends Repository
         $article->fill($data);
         if ($article->update()) {
             return ['status' => 'Материал обновлен'];
-        } else {
-            return ['error' => 'Материал не обновлен'];
+        }
+    }
+
+    public function deleteArticles($article)
+    {
+        if (Gate::denies('destroy', $article)) {
+            abort(403);
         }
 
+        $article->comments()->delete();
+        if ($article->delete()) {
+            return ['status' => 'Материал удален'];
+        }
     }
 }

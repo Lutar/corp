@@ -83,5 +83,7 @@
             <!-- #respond -->
         </div>
         <!-- END COMMENTS -->
-        @endif
+    @else
+        {!! trans('ru.article_no') !!}
+    @endif
 </div>

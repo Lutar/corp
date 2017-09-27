@@ -82,9 +82,11 @@ class ArticlesController extends SiteController
             ->render();
 
 
-        $this->keywords = $article->keywords;
-        $this->meta_desc = $article->meta_desc;
-        $this->title = $article->title;
+        if ($article) {
+            $this->keywords = $article->keywords;
+            $this->meta_desc = $article->meta_desc;
+            $this->title = $article->title;
+        }
 
 
         return $this->renderOutput();
