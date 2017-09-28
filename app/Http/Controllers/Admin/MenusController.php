@@ -37,7 +37,7 @@ class MenusController extends AdminController
      */
     public function index()
     {
-        $this->title = 'Менеджер меню';
+        $this->title = 'Меню менеджер';
         $menu = $this->getMenus();
 
         $this->content = view(env('THEME').'.admin.menus_content')
@@ -73,7 +73,71 @@ class MenusController extends AdminController
      */
     public function create()
     {
-        //
+        $this->title = 'Меню менеджер';
+        $tmp = $this->getMenus()->roots();
+        $menus = $tmp->reduce(function ($returnMenus, $menu) {
+
+            $returnMenus[$menu->id] = $menu->title;
+            return $returnMenus;
+
+        }, [0 => 'Родительский пункт меню']);
+
+
+        $categories = \Corp\Category::select('title', 'alias', 'parent_id', 'id')->get();
+        $list = array(0 => 'Не используется');
+        $list[] = ['parent' => 'Раздел блог'];
+
+        foreach ($categories as $category) {
+            if (0 == $category->parent_id) {
+                $list[$category->title] = array();
+            } else {
+                $list[
+                    $category
+                        ->where('id', $category->parent_id)
+                        ->first()
+                        ->title
+                ][$category->alias] = $category->title;
+            }
+        }
+
+
+        $articles = $this->a_rep->get(['id', 'title', 'alias']);
+        $articles = $articles->reduce(function ($returnArticles, $article) {
+
+            $returnArticles[$article->alias] = $article->title;
+            return $returnArticles;
+
+        }, []);
+
+
+        $filters = \Corp\Filter::select(['id', 'title', 'alias'])->get()->reduce(function ($returnFilters, $filter) {
+
+            $returnFilters[$filter->alias] = $filter->title;
+            return $returnFilters;
+
+        }, ['parent' => 'Раздел портфолио']);
+
+
+        $portfolios = $this->p_rep->get(['id', 'title', 'alias']);
+        $portfolios = $portfolios->reduce(function ($returnPortfolios, $potfolio) {
+
+            $returnPortfolios[$potfolio->alias] = $potfolio->title;
+            return $returnPortfolios;
+
+        }, []);
+
+
+        $this->content = view(env('THEME').'.admin.menus_create_content')
+            ->with([
+                'menus' => $menus,
+                'categories' => $list,
+                'articles' => $articles,
+                'filters' => $filters,
+                'portfolios' => $portfolios
+            ])->render();
+
+
+        return $this->renderOutput();
     }
 
     /**
