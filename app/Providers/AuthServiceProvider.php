@@ -3,8 +3,10 @@
 namespace Corp\Providers;
 
 use Corp\Article;
+use Corp\Menu;
 use Corp\Permission;
 use Corp\Policies\ArticlePolicy;
+use Corp\Policies\MenusPolicy;
 use Corp\Policies\PermissionPolicy;
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -19,6 +21,7 @@ class AuthServiceProvider extends ServiceProvider
     protected $policies = [
         Article::class => ArticlePolicy::class,
         Permission::class => PermissionPolicy::class,
+        Menu::class => MenusPolicy::class,
     ];
 
     /**
@@ -45,6 +48,10 @@ class AuthServiceProvider extends ServiceProvider
 
         $gate->define('VIEW_ADMIN_MENU', function ($user) {
             return $user->canDo('VIEW_ADMIN_MENU');
+        });
+
+        $gate->define('EDIT_MENU', function ($user) {
+            return $user->canDo('EDIT_MENU');
         });
     }
 }

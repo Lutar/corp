@@ -24,7 +24,7 @@
                     <span class="sublabel">Родитель:</span><br />
                 </label>
                 <div class="input-prepend">
-                    {!! Form::select('parent', $menus, isset($menu->parent) ? $menu->parent : null) !!}
+                    {!! Form::select('parent_id', $menus, isset($menu->parent_id) ? $menu->parent_id : null) !!}
                 </div>
             </li>
         </ul>
@@ -33,7 +33,7 @@
 
         <div id="accordion">
 
-            <h3>{!! Form::radio('type', 'customLink',(isset($type) && $type == 'customLink') ? TRUE : FALSE,['class' => 'radioMenu']) !!}
+            <h3>{!! Form::radio('type', 'customLink','checked',(isset($type) && $type == 'customLink') ? TRUE : FALSE,['class' => 'radioMenu']) !!}
                 <span class="label">Пользовательская ссылка:</span></h3>
 
             <ul>
@@ -143,3 +143,17 @@
 
     </div>
 </div>
+<script>
+    jQuery(function ($) {
+
+        $('#accordion').accordion({
+
+            activate: function (e, obj) {
+
+                obj.newPanel.prev().find('input[type=radio]').attr('checked', 'checked');
+
+            }
+        });
+
+    })
+</script>

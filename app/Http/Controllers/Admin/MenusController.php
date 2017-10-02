@@ -85,7 +85,8 @@ class MenusController extends AdminController
 
         $categories = \Corp\Category::select('title', 'alias', 'parent_id', 'id')->get();
         $list = array(0 => 'Не используется');
-        $list[] = ['parent' => 'Раздел блог'];
+        $list['parent'] = 'Раздел блог';
+
 
         foreach ($categories as $category) {
             if (0 == $category->parent_id) {
@@ -146,9 +147,15 @@ class MenusController extends AdminController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Requests\MenusRequest $request)
     {
-        //
+        $result = $this->m_rep->addMenu($request);
+
+        if (is_array($result) && !empty($result['error'])) {
+            return back()->with($result);
+        }
+
+        return redirect('/admin')->with($result);
     }
 
     /**
