@@ -53,5 +53,13 @@ class AuthServiceProvider extends ServiceProvider
         $gate->define('EDIT_MENU', function ($user) {
             return $user->canDo('EDIT_MENU');
         });
+
+        $gate->define('UPDATE_MENU', function ($user) {
+            return $user->canDo('UPDATE_MENU');
+        });
+
+        $gate->define('DELETE_MENU', function ($user) {
+            return $user->canDo('DELETE_MENU');
+        });
     }
 }
